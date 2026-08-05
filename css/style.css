@@ -161,7 +161,7 @@ a:hover {
   font-family: var(--font-display);
   font-size: 56px;
   margin: 0;
-  color: var(--bone);
+  color: var(--magenta);
   text-shadow:
     0 0 8px var(--bone),
     0 0 22px var(--bone),
