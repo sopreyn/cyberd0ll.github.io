@@ -58,7 +58,7 @@ async function initMerchList() {
   if (!list) return;
 
   try {
-    const res = await fetch(`${BIGCARTEL_STORE_URL}/products.json`);
+    const res = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(BIGCARTEL_STORE_URL + '/products.json')}`);
     if (!res.ok) throw new Error(`bad response: ${res.status}`);
 
     const data = await res.json();
@@ -87,11 +87,22 @@ function renderMerchItem(product) {
     ? `${BIGCARTEL_STORE_URL}${product.url}`
     : BIGCARTEL_STORE_URL;
 
+  const imageUrl = product.images && product.images.length
+    ? product.images[0].url
+    : '';
+
+  const thumb = imageUrl
+    ? `<img class="merch-thumb" src="${imageUrl}" alt="" loading="lazy" onerror="this.remove()">`
+    : '';
+
   return `
     <li>
       <a href="${url}" target="_blank" rel="noopener">
-        <span>${name}</span>
-        <span class="merch-price">${price}</span>
+        ${thumb}
+        <span class="merch-info">
+          <span class="merch-name">${name}</span>
+          <span class="merch-price">${price}</span>
+        </span>
       </a>
     </li>
   `;

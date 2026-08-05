@@ -242,12 +242,33 @@ a:hover {
 
 .merch-list a {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
   gap: 8px;
-  padding: 8px 10px;
-  font-size: 13px;
+  padding: 6px 10px;
   text-decoration: none;
   color: var(--bone);
+}
+
+.merch-thumb {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border: 1px solid var(--blood);
+  filter: grayscale(30%) contrast(110%);
+  flex-shrink: 0;
+}
+
+.merch-info {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.merch-name {
+  flex: 1;
 }
 
 .merch-list a:hover {
