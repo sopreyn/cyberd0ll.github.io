@@ -4,8 +4,8 @@
   --bone: #e8e4d8;
   --blood: #8b0000;
   --blood-bright: #d4001f;
-  --acid: #39ff14;
-  --magenta: #ff00aa;
+  --acid: #fff700;
+  --magenta: #0088ff;
   --panel-bg: rgba(10, 10, 10, 0.82);
   --font-display: 'Nosifer', 'Times New Roman', serif;
   --font-body: 'Times New Roman', Times, serif;
@@ -161,10 +161,10 @@ a:hover {
   font-family: var(--font-display);
   font-size: 56px;
   margin: 0;
-  color: var(--blood-bright);
+  color: var(--bone);
   text-shadow:
-    0 0 8px var(--blood-bright),
-    0 0 22px var(--blood),
+    0 0 8px var(--bone),
+    0 0 22px var(--bone),
     2px 2px 0 #000;
   letter-spacing: 2px;
 }
