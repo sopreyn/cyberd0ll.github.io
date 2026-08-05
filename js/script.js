@@ -27,18 +27,6 @@ function initHitCounter() {
 
   el.textContent = String(count).padStart(6, '0');
 }
-
-/* ---------------- instagram feed ---------------- */
-/*
-  NOTE: Instagram doesn't allow pulling a live feed with plain
-  client-side JS/HTML — it requires an authenticated Graph API
-  call (personal accounts are no longer supported at all), or a
-  third-party embed widget (SnapWidget, Behold.so, Spotlight,
-  LightWidget) that handles the auth for you.
-
-  POSTS is currently empty — fill it in manually, or replace this
-  whole function with an embed widget's script snippet.
-*/
 function initInstaFeed() {
   const feed = document.getElementById('insta-feed');
   if (!feed) return;
