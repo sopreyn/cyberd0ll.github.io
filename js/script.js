@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initMerchList();
   initGlitchFlicker();
   initCursorTrail();
-  initBigCartelPlaceholders();
 });
 
 /* ---------------- fake hit counter ---------------- */
@@ -32,26 +31,19 @@ function initHitCounter() {
 /* ---------------- instagram feed ---------------- */
 /*
   NOTE: Instagram doesn't allow pulling a live feed with plain
-  client-side JS/HTML — it requires an authenticated API call
-  (Instagram Basic Display / Graph API) from a server, or a
-  third-party embed widget (e.g. SnapWidget, Elfsight, Behold.so)
-  that handles the auth for you.
+  client-side JS/HTML — it requires an authenticated Graph API
+  call (personal accounts are no longer supported at all), or a
+  third-party embed widget (SnapWidget, Behold.so, Spotlight,
+  LightWidget) that handles the auth for you.
 
-  For now this renders placeholder tiles so the layout is real.
-  Replace POSTS below with real post data/thumbnails, or swap
-  this whole function out for an embed widget's script snippet.
+  POSTS is currently empty — fill it in manually, or replace this
+  whole function with an embed widget's script snippet.
 */
 function initInstaFeed() {
   const feed = document.getElementById('insta-feed');
   if (!feed) return;
 
   const POSTS = [
-    { caption: 'new drop soon 🖤' },
-    { caption: 'studio nite' },
-    { caption: 'she lives' },
-    { caption: 'merch preview' },
-    { caption: 'behind the mask' },
-    { caption: 'don\u2019t look directly at it' }
   ];
 
   feed.innerHTML = POSTS.map(post => `
@@ -64,52 +56,63 @@ function initInstaFeed() {
 
 /* ---------------- merch list ---------------- */
 /*
-  NOTE: once the Big Cartel store is live, replace ITEMS below
-  with your real products (or fetch them — Big Cartel exposes a
-  JSON feed per store, e.g. https://yourstore.bigcartel.com/products.json
-  which you can fetch() and map over instead of hardcoding).
+  Pulls live products from the Big Cartel storefront JSON feed:
+  https://cyberd0ll.bigcartel.com/products.json
+
+  Each product links straight to its Big Cartel product page.
+  If the fetch fails (offline, store paused, CORS issue, etc.)
+  it falls back to a single link pointing at the full store.
 */
-function initMerchList() {
+const BIGCARTEL_STORE_URL = 'https://cyberd0ll.bigcartel.com';
+
+async function initMerchList() {
   const list = document.getElementById('merch-list');
   if (!list) return;
 
-  const ITEMS = [
-    { name: 'CYBERD0LL logo tee — black', price: '$28' },
-    { name: 'CYBERD0LL logo tee — bone', price: '$28' },
-    { name: 'glitch baby doll long sleeve', price: '$34' },
-    { name: 'static hoodie', price: '$52' },
-    { name: 'error 404 tee', price: '$26' },
-    { name: 'haunted webring sticker pack', price: '$8' }
-  ];
+  try {
+    const res = await fetch(`${BIGCARTEL_STORE_URL}/products.json`);
+    if (!res.ok) throw new Error(`bad response: ${res.status}`);
 
-  list.innerHTML = ITEMS.map(item => `
+    const data = await res.json();
+    const products = Array.isArray(data) ? data : (data.products || []);
+
+    if (!products.length) throw new Error('no products returned');
+
+    list.innerHTML = products.map(renderMerchItem).join('');
+  } catch (err) {
+    console.error('could not load big cartel products:', err);
+    list.innerHTML = `
+      <li>
+        <a href="${BIGCARTEL_STORE_URL}" target="_blank" rel="noopener">
+          <span>view merch on big cartel</span>
+          <span class="merch-price">&gt;&gt;</span>
+        </a>
+      </li>
+    `;
+  }
+}
+
+function renderMerchItem(product) {
+  const name = product.name || 'untitled item';
+  const price = formatPrice(product.price);
+  const url = product.url
+    ? `${BIGCARTEL_STORE_URL}${product.url}`
+    : BIGCARTEL_STORE_URL;
+
+  return `
     <li>
-      <a href="#" class="bigcartel-item">
-        <span>${item.name}</span>
-        <span class="merch-price">${item.price}</span>
+      <a href="${url}" target="_blank" rel="noopener">
+        <span>${name}</span>
+        <span class="merch-price">${price}</span>
       </a>
     </li>
-  `).join('');
-
-  list.querySelectorAll('.bigcartel-item').forEach(a => {
-    a.addEventListener('click', handleStoreNotReady);
-  });
+  `;
 }
 
-/* ---------------- big cartel placeholder links ---------------- */
-/* The store link is empty until Big Cartel is set up. Swap the
-   href on #bigcartel-link and #bigcartel-link-2 to the real store
-   URL, then delete this whole function + its listeners. */
-function initBigCartelPlaceholders() {
-  ['bigcartel-link', 'bigcartel-link-2'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('click', handleStoreNotReady);
-  });
-}
-
-function handleStoreNotReady(e) {
-  e.preventDefault();
-  alert('store coming soon... check back later <3');
+function formatPrice(price) {
+  const num = typeof price === 'number' ? price : parseFloat(price);
+  if (isNaN(num)) return '';
+  return `$${num.toFixed(2)}`;
 }
 
 /* ---------------- glitch / static flicker ---------------- */
