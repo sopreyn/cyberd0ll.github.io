@@ -7,7 +7,7 @@
   --acid: #fff700;
   --magenta: #0088ff;
   --panel-bg: rgba(10, 10, 10, 0.82);
-  --font-display: 'Nosifer', 'Times New Roman', serif;
+  --font-display: 'Impact', 'Times New Roman', serif;
   --font-body: 'Times New Roman', Times, serif;
   --font-system: 'Courier New', Courier, monospace;
 }
@@ -394,6 +394,16 @@ a:hover {
 .footer-bar .small {
   font-size: 10px;
   margin-top: 2px;
+}
+.contact-bar {
+  text-align: left;
+  font-family: var(--font-system);
+  font-size: 11px;
+  color: var(--bone);
+  opacity: 0.6;
+  padding: 10px 0 10px;
+  position: relative;
+  z-index: 2;
 }
 
 /* ---------------- CRT / haunted overlay ---------------- */
