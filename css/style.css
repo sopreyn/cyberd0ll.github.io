@@ -394,12 +394,13 @@ a:hover {
 .footer-bar .small {
   font-size: 10px;
   margin-top: 2px;
+  text-align: left;
 }
 
 .contact-bar {
-  text-align: left;
+  text-align: center;
   font-family: var(--font-system);
-  font-size: 11px;
+  font-size: 10px;
   color: var(--bone);
   opacity: 0.6;
   padding: 10px 0 10px;
