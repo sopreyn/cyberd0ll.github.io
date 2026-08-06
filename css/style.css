@@ -378,7 +378,7 @@ a:hover {
   font-size: 11px;
 }
 
-/* ---------------- footer ---------------- */
+/* ---------------- footer/contact ---------------- */
 
 .footer-bar {
   text-align: center;
@@ -395,6 +395,7 @@ a:hover {
   font-size: 10px;
   margin-top: 2px;
 }
+
 .contact-bar {
   text-align: left;
   font-family: var(--font-system);
