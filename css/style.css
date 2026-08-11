@@ -34,7 +34,7 @@ body::before {
   z-index: 0;
   background-image: url('../assets/images/cyberdolllogo.PNG'), url(../assets/images/boiled-one-boiled.gif), url(../assets/images/intruder.gif), url(../assets/images/wriorinde-this-man.gif);
   background-repeat: no-repeat, round, repeat-x, repeat-y;
-  background-position: center, top left, bottom left, top right;
+  background-position: center, top;
   background-size: contain, contain, auto, auto;
   opacity: 0.33;
   pointer-events: none;
