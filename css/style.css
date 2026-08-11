@@ -22,7 +22,7 @@ html, body {
   background-color: var(--bg);
   color: var(--bone);
   font-family: var(--font-body);
-  cursor: url('../assets/images/tung tung sahur.cur'), auto;
+  cursor: url('../assets/images/tung-tung-sahur-32-preview.png'), auto;
   overflow-x: hidden;
   position: relative;
 }
