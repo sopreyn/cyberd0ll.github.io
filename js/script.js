@@ -129,7 +129,7 @@ function initGlitchFlicker() {
 
 /* ---------------- cursor trail ---------------- */
 function initCursorTrail() {
-  const symbols = ['✞', '☠', '◆', '✧'];
+  const symbols = ['◆', '✧'];
   let last = 0;
 
   document.addEventListener('mousemove', (e) => {
