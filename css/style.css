@@ -27,6 +27,10 @@ html, body {
   position: relative;
 }
 
+body.swinging {
+  cursor: url('../assets/images/tung-tung-sahur-32-swing.png'), auto;
+}
+
 body::before {
   content: '';
   position: fixed;
