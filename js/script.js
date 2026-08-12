@@ -1,23 +1,24 @@
 /* ============================================================
    CYBERD0LL — site behavior
    ============================================================ */
-
+   
 document.addEventListener('DOMContentLoaded', () => {
   initHitCounter();
   initInstaFeed();
   initMerchList();
   initGlitchFlicker();
   initCursorTrail();
+  initSwingCursor();
 });
 
-/*tung tung swing effect*/
-
-document.body.addEventListener('click', () => {
-  document.body.classList.add('swinging');
-  setTimeout(() => {
-    document.body.classList.remove('swinging');
-  }, 150); // tweak timing to taste — short flash reads best for a swing
-});
+function initSwingCursor() {
+  document.body.addEventListener('click', () => {
+    document.body.classList.add('swinging');
+    setTimeout(() => {
+      document.body.classList.remove('swinging');
+    }, 150);
+  });
+}
 
 function initHitCounter() {
   const el = document.getElementById('hit-counter');
