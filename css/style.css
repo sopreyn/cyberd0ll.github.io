@@ -16,6 +16,10 @@
   box-sizing: border-box;
 }
 
+*, *::before, *::after {
+  cursor: inherit;
+}
+
 html, body {
   margin: 0;
   padding: 0;
